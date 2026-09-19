@@ -4,7 +4,7 @@ A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Ngi
 
 ---
 
-[![Watch the Demo](assets/architecture.png)](assets/Screencast_20260919_175052.webm)
+[![Watch the Demo](assets/architecture.png)](assets/demo.webm)
 
 ---
 
