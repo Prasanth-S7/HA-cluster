@@ -1,6 +1,6 @@
 # 2-Node HA Cluster (Pacemaker + Corosync + Nginx)
 
-A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Nginx** as a reverse proxy in front of a lightweight **Python HTTP server**, with **Pacemaker** and **Corosync** managing failover of the application and floating/elastic IP between nodes.
+A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Nginx** as a reverse proxy in front of a lightweight **Python HTTP server**, with **Pacemaker** and **Corosync** managing failover of the application and floating IP between nodes.
 
 ---
 
@@ -160,5 +160,5 @@ Either action should stop the services on the current node and bring them up on 
 
 ## Notes
 
-- Elastic IP / secondary private IP movement between nodes is handled via AWS CLI calls (enabled by the attached IAM role) as part of the failover flow — see `configs/IAMpolicy.json` for the exact permissions granted.
+- Secondary private IP movement between nodes is handled via AWS CLI calls (enabled by the attached IAM role) as part of the failover flow — see `configs/IAMpolicy.json` for the exact permissions granted.
 - Always re-lock down port 80 (and any other dev-only rules) before treating this setup as production-ready.
