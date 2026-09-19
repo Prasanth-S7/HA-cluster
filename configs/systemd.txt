@@ -1,0 +1,16 @@
+[Unit]
+Description=Simple Python HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+
+#change the node name according to the node you are running this service on
+Environment="NODE_NAME=node 1"
+ExecStart=/usr/bin/python3 /home/ubuntu/server/serve.py
+Restart=on-failure
+User=root
+WorkingDirectory=/home/ubuntu/server
+
+[Install]
+WantedBy=multi-user.target
