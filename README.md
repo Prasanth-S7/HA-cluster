@@ -1,20 +1,24 @@
 # 2-Node HA Cluster (Pacemaker + Corosync + Nginx)
 
-A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Nginx** as a reverse proxy in front of a lightweight **Python HTTP server**, with **Pacemaker** and **Corosync** managing failover of the application and (optionally) the floating/elastic IP between nodes.
+A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Nginx** as a reverse proxy in front of a lightweight **Python HTTP server**, with **Pacemaker** and **Corosync** managing failover of the application and floating/elastic IP between nodes.
 
 ---
 
-[![Watch the Demo](assets/architecture.png)]
-<video src="https://raw.githubusercontent.com/Prasanth-S7/HA-cluster/main/assets/demo.webm" controls="controls" width="100%"></video>
+<video src="https://github.com/user-attachments/assets/f52a8de9-5f29-4784-b813-22edc0ddd711" controls="controls" width="100%"></video>
 
 ---
 
 ## Architecture
 
-- 2x EC2 Ubuntu instances in the same subnet, forming a Corosync/Pacemaker cluster.
-- Each node runs the same stack: `serve.py` (Python HTTP server) behind Nginx (reverse proxy on port 80).
-- Pacemaker manages the application resource (start/stop/move), so the systemd service is **never enabled directly** — cluster resource management owns the lifecycle.
-- An IAM role attached to both nodes allows AWS CLI calls (e.g., to move an Secondary private IP as part of failover automation).
+![Architecture](assets/architecture.png)
+
+* 2x EC2 Ubuntu instances in the same subnet, forming a Corosync/Pacemaker cluster.
+
+* Each node runs the same stack: `serve.py` (Python HTTP server) behind Nginx (reverse proxy on port 80).
+
+* Pacemaker manages the application resource (start/stop/move), so the systemd service is **never enabled directly** — cluster resource management owns the lifecycle.
+
+* An IAM role attached to both nodes allows AWS CLI calls (e.g., to move a secondary private IP as part of failover automation).
 
 ---
 
