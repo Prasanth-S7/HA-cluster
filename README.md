@@ -33,7 +33,8 @@ A simple 2-node High Availability cluster built on AWS EC2. Each node runs **Ngi
 ## Setup Steps
 
 ### 1. Provision the instances
-Create 2 EC2 Ubuntu instances within the same subnet.
+- Create 2 EC2 Ubuntu instances within the same subnet.
+- Add a secondary private IP to any one of the instance which will act as VIP
 
 ### 2. Configure security groups
 Update the security group on **both** nodes to allow:
