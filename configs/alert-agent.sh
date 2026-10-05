@@ -14,6 +14,13 @@
 : ${CRM_alert_target_rc:="-1"}
 
 LOGFILE="/var/log/crm_alerts_log.log"
+RAW_LOGS="/var/log/crm_alerts_raw.log"
+
+
+# logging raw logs here for debugging purposes
+# {
+#     env | grep 'CRM_' | sort >> "$RAW_LOGS"
+# }
 
 # Ignore routine successful monitor passes
 if [ "$CRM_alert_kind" = "resource" ] && [ "$CRM_alert_task" = "monitor" ]; then
@@ -66,7 +73,12 @@ if [ "$CRM_alert_kind" = "node" ]; then
     fi
 fi
 
-# Write one JSON object per alert
+# Fencing alerts
+if [ "$CRM_alert_kind" = "fencing" ]; then
+    status="error"
+    message="Fencing event detected: node $CRM_alert_node ($CRM_alert_desc)"
+fi
+
 {
     printf '{\n'
     printf '    "timestamp": "%s",\n' "$CRM_alert_timestamp"
